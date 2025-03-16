@@ -1,6 +1,11 @@
 #pragma once
 
 #include <iostream>
+#include <string>
+#include <istream>
+#include <fstream>
+
+
 using namespace std;
 
 
@@ -9,9 +14,9 @@ class Block {
 	friend class Board;
 private:
 	int row, col;
-	bool covered;
+	bool given;
 	int value;
-	int userValue;// 0 for not guessed
+	int userValue;// 0 for not guessed, -1 for given
 	bool temp[9] = { false };
 	int correct;//-1 not guessed, 0 incorrect, 1 correct
 
@@ -19,8 +24,8 @@ public:
 	Block();
 	Block(int r, int c, int num, bool cov);
 	void tempToggle(int num);
-	void guess(int num);
-	void check();
+	int guess(int num);
+	int check();
 };
 
 class Board {
@@ -29,4 +34,6 @@ private:
 public:
 	Board();
 	void printBoard();
+	Block& locate(int x, int y);
+	int win();
 };
