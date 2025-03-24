@@ -5,7 +5,7 @@ Board::Board() {
 	int cov[9][9];
 	string line;
 
-	ifstream fin("boards.txt");
+	ifstream fin("sudoku_boards.txt");
 
 	getline(fin, line);
 	for (int i = 0; i < 9; i++) {
