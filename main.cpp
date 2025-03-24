@@ -2,7 +2,7 @@
 #include "Board.h"
 
 int main() {
-	Board b;
+	Board b("h1");
 	b.printBoard();
 	int row;
 	int col;

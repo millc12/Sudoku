@@ -32,7 +32,7 @@ class Board {
 private:
 	Block board[9][9];
 public:
-	Board();
+	Board(string difficulty);
 	void printBoard();
 	Block& locate(int x, int y);
 	int win();

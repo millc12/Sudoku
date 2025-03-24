@@ -1,13 +1,25 @@
 #include "Board.h"
 
-Board::Board() {
+Board::Board(string difficulty) {
 	int sol[9][9];
 	int cov[9][9];
 	string line;
 
+
 	ifstream fin("boards.txt");
 
+	string location;
+	bool found;
+
+	while (getline(fin, location)) {
+		if (location == difficulty) {
+			found = true;
+			break;
+		}
+	}
+
 	getline(fin, line);
+
 	for (int i = 0; i < 9; i++) {
 		for (int j = 0; j < 9; j++) {
 			cov[i][j] = line[i * 9 + j] - '0';
