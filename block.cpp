@@ -1,39 +1,32 @@
-#pragma once
+#include "Board.h"
 
-#include <iostream>
-#include <string>
-#include <istream>
-#include <fstream>
+Block::Block() : row(0), col(0), given(false), value(0), userValue(0), correct(-1) {}
 
+Block::Block(int r, int c, int num, bool cov) {
+	row = r;
+	col = c;
+	given = cov;
+	value = num;
+	userValue = -1;
+	correct = 1;
+	if (!given) {
+		userValue = 0;
+		correct = -1;
+	}
+}
 
-using namespace std;
+void Block::tempToggle(int num) {
+	temp[num - 1] = !temp[num - 1];
+}
 
+int Block::guess(int num) {
+	if (given) return 1;
+	userValue = num;
+	cout << "Value at " << row << " " << col << " is " << userValue << endl;
+	return 0;
+}
 
-
-class Block {
-	friend class Board;
-private:
-	int row, col;
-	bool given;
-	int value;
-	int userValue;// 0 for not guessed, -1 for given
-	bool temp[9] = { false };
-	int correct;//-1 not guessed, 0 incorrect, 1 correct
-
-public:
-	Block();
-	Block(int r, int c, int num, bool cov);
-	void tempToggle(int num);
-	int guess(int num);
-	int check();
-};
-
-class Board {
-private:
-	Block board[9][9];
-public:
-	Board();
-	void printBoard();
-	Block& locate(int x, int y);
-	int win();
-};
+int Block::check() {
+	correct = (userValue == 0) ? -1 : (userValue == value) ? 1 : 0;
+	return correct;
+}

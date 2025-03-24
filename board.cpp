@@ -30,7 +30,7 @@ Board::Board() {
 }
 
 Block& Board::locate(int x, int y) {
-	return board[x-1][y-1];
+	return board[x - 1][y - 1];
 }
 
 int Board::win() {

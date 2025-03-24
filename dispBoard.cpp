@@ -12,7 +12,7 @@ void Board::printBoard() {
 	cout << red << "   1 2 3   4 5 6   7 8 9" << reset << endl;
 	for (int i = 0; i < 9; i++) {
 		cout << red << i + 1 << "  " << reset;
-		for (int j	 = 0; j < 9; j++) {
+		for (int j = 0; j < 9; j++) {
 			if (board[i][j].given)cout << board[i][j].value << " ";
 			else if (board[i][j].userValue == 0) cout << ". ";
 			else cout << cyan << board[i][j].userValue << " " << reset;
@@ -21,8 +21,6 @@ void Board::printBoard() {
 		}
 		cout << endl;
 		if (i == 2 || i == 5)cout << yellow << "   ------+-------+------" << reset << endl;
-		
+
 	}
 };
-
-
