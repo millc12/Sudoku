@@ -9,7 +9,7 @@ Board::Board(string difficulty) {
 	ifstream fin("boards.txt");
 
 	string location;
-	bool found;
+	bool found = false;
 
 	while (getline(fin, location)) {
 		if (location == difficulty) {

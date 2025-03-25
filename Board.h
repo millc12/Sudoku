@@ -4,6 +4,7 @@
 #include <string>
 #include <istream>
 #include <fstream>
+#include <vector>
 
 
 using namespace std;
@@ -37,3 +38,5 @@ public:
 	Block& locate(int x, int y);
 	int win();
 };
+
+string chooseBoard();
