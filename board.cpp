@@ -45,6 +45,8 @@ Block& Board::locate(int x, int y) {
 	return board[x - 1][y - 1];
 }
 
+Board::~Board() { cout << "Game exited"; }
+
 int Board::win() {
 	for (int i = 0; i < 9; i++) {
 		for (int j = 0; j < 9; j++) {

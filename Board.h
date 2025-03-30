@@ -35,6 +35,9 @@ private:
 	Block board[9][9];
 public:
 	Board(string difficulty);
+	~Board();
+	int cursorRow = 0;
+	int cursorCol = 0;
 	friend ostream& operator<<(ostream &os, const Board &b);
 	Block& locate(int x, int y);
 	int win();
