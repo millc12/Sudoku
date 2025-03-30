@@ -27,6 +27,7 @@ public:
 	void tempToggle(int num);
 	int guess(int num);
 	int check();
+	friend ostream& operator<<(ostream& os, const Board& b);
 };
 
 class Board {
@@ -34,7 +35,7 @@ private:
 	Block board[9][9];
 public:
 	Board(string difficulty);
-	void printBoard();
+	friend ostream& operator<<(ostream &os, const Board &b);
 	Block& locate(int x, int y);
 	int win();
 };

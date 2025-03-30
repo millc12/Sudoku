@@ -5,7 +5,7 @@ int main() {
 	srand(time(NULL));
 	cout << "Welcome to Sudoku!" << endl;
 	Board b(chooseBoard());
-	b.printBoard();
+	cout<<b;
 	int row;
 	int col;
 	int guess;
@@ -19,7 +19,7 @@ int main() {
 		cin >> guess;
 		b.locate(row, col).guess(guess);
 		b.locate(row, col).check();
-		b.printBoard();
+		cout<<b;
 		if (b.win()) break;
 	} while (true);
 
