@@ -67,3 +67,5 @@ int Board::win() {
 	return 1;
 }
 
+
+

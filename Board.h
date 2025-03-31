@@ -43,16 +43,8 @@ class InputBlock : public Block {
 public:
 	InputBlock(int r, int c, int num) : Block(r, c, num) { userValue = 0;correct = -1; }
 	bool isEditable() const override { return true; }
-	int guess(int num) override {
-		userValue = num;
-		return 0;
-	}
-	int check() override {
-		if (userValue == 0) correct = -1;
-		else if (userValue == value) correct = 1;
-		else correct = 0;
-		return correct;
-	}
+	int guess(int num) override {userValue = num;return 0;}
+	int check() override {if (userValue == 0) correct = -1;else if (userValue == value) correct = 1;else correct = 0;return correct;}
 };
 
 

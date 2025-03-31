@@ -2,7 +2,7 @@
 #include "ArrowNav.h"
 
 void howToPlay() {
-	
+
 	cout << "How to play:" << endl;
 	cout << "Each row, column and box should only have one of each digit. Fill out the whole board to win!" << endl;
 	cout << "To navigate the board, use arrow keys" << endl;
@@ -23,7 +23,7 @@ int main() {
 	howToPlay();
 	Board b(chooseBoard());
 
-	cout<<b;
+	cout << b;
 	int ch;
 	int arrow;
 
@@ -47,7 +47,7 @@ int main() {
 				break;
 			}
 		}
-		else if(ch == '?') howToPlay();
+		else if (ch == '?') howToPlay();
 		else if (ch >= '1' && ch <= '9') {
 			int guess = ch - '0';
 			try {
@@ -79,4 +79,3 @@ int main() {
 
 	return 0;
 }
-
