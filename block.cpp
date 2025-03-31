@@ -27,8 +27,7 @@ int Block::guess(int num) {
 
 int Block::check() {
 	if (given) {
-		correct = 1;
-		return correct;
+		throw runtime_error("Cannot modify a given cell.");
 	}
 	correct = (userValue == 0) ? -1 : (userValue == value) ? 1 : 0;
 	return correct;

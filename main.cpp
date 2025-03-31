@@ -8,7 +8,8 @@ void howToPlay() {
 	cout << "To navigate the board, use arrow keys" << endl;
 	cout << "To guess a number, just type that number!" << endl;
 	cout << "To remove a guess, press backspace or 0" << endl;
-	cout << "To exit the game early, press the esc button" << endl << endl << endl;
+	cout << "To exit the game early, press the esc button" << endl;
+	cout << "For help, type '?'" << endl;
 
 	cout << "Press enter to continue" << endl;
 
@@ -49,8 +50,16 @@ int main() {
 		else if(ch == '?') howToPlay();
 		else if (ch >= '1' && ch <= '9') {
 			int guess = ch - '0';
-			b.locate(b.cursorRow + 1, b.cursorCol + 1).guess(guess);
-			b.locate(b.cursorRow + 1, b.cursorCol + 1).check();
+			try {
+				b.locate(b.cursorRow + 1, b.cursorCol + 1).guess(guess);
+				b.locate(b.cursorRow + 1, b.cursorCol + 1).check();
+			}
+			catch (const exception& e) {
+				cout << "\033[31m" << "Error: " << e.what() << "\033[0m" << endl;
+				cout << "Press any key to continue";
+				_getch();
+				cout << b;
+			}
 		}
 		else if (ch == '0' || ch == 8) {
 			b.locate(b.cursorRow + 1, b.cursorCol + 1).guess(0);
@@ -65,6 +74,9 @@ int main() {
 
 		if (b.win()) break;
 	} while (true);
+
+
+
 	return 0;
 }
 
