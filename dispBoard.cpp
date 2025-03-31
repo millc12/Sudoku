@@ -13,9 +13,9 @@ ostream& operator<<(ostream &os, const Board &b){
 	for (int i = 0; i < 9; i++) {
 		os << red << i + 1 << "  " << reset;
 		for (int j = 0; j < 9; j++) {
-			const Block& cell = b.board[i][j];
+			const Block& cell = *b.board[i][j];
 			if (i == b.cursorRow && j == b.cursorCol)os << "\033[7m";
-			if (cell.given)os << cell.value << " ";
+			if (!cell.isEditable())os << cell.value << " ";
 			else if (cell.userValue == 0) os << ". ";
 			else os << cyan << cell.userValue << " " << reset;
 			if (i == b.cursorRow && j == b.cursorCol)os << "\033[0m";

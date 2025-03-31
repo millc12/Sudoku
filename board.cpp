@@ -36,21 +36,31 @@ Board::Board(string difficulty) {
 
 	for (int i = 0; i < 9; i++) {
 		for (int j = 0; j < 9; j++) {
-			board[i][j] = Block(i, j, sol[i][j], cov[i][j]);
+			if (cov[i][j] == 1)
+				board[i][j] = new GivenBlock(i, j, sol[i][j]);
+			else
+				board[i][j] = new InputBlock(i, j, sol[i][j]);
 		}
 	}
 }
 
 Block& Board::locate(int x, int y) {
-	return board[x - 1][y - 1];
+	return *board[x - 1][y - 1];
 }
 
-Board::~Board() { cout << "Game exited"; }
+Board::~Board() { 
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			delete board[i][j];
+		}
+	}
+	cout << "Game exited"; 
+}
 
 int Board::win() {
 	for (int i = 0; i < 9; i++) {
 		for (int j = 0; j < 9; j++) {
-			if (board[i][j].correct != 1) return 0;
+			if (board[i][j]->check() != 1) return 0;
 		}
 	}
 	cout << "You win!!!!" << endl;
