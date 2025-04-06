@@ -11,18 +11,19 @@ void enableVirtualTerminal() {
 
 void howToPlay() {
 
+	cout << "\033[0m";
 	cout << "How to play:" << endl;
 	cout << "Each row, column and box should only have one of each digit. Fill out the whole board to win!" << endl;
 	cout << "To navigate the board, use arrow keys" << endl;
-	cout << "To guess a number, just type that number!" << endl;
+	cout << "To guess a number, shift+number" << endl;
+	cout << "To take notes of number possibilities and remove them, press the corresponding number" << endl;
 	cout << "To remove a guess, press backspace or 0" << endl;
 	cout << "To exit the game early, press the esc button" << endl;
 	cout << "For help, type '?'" << endl;
 
 	cout << "Press enter to continue" << endl;
 
-	cin.ignore();
-	cin.get();
+	_getch();
 }
 
 int main() {
