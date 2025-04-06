@@ -95,8 +95,15 @@ int main() {
 			}
 		}
 		else if (ch == '0' || ch == 8) {
-			b.locate(b.cursorRow + 1, b.cursorCol + 1).guess(0);
-			b.locate(b.cursorRow + 1, b.cursorCol + 1).check();
+			try {
+				b.locate(b.cursorRow + 1, b.cursorCol + 1).guess(0);
+				b.locate(b.cursorRow + 1, b.cursorCol + 1).check();
+			}
+			catch (const exception& e) {
+				cout << "\033[31m" << "Error: " << e.what() << "\033[0m" << endl;
+				cout << "Press any key to continue";
+				_getch();
+			}
 		}
 		else if (ch == 27) {
 			cout << "Exiting..." << endl;

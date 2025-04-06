@@ -67,6 +67,7 @@ public:
 	int cursorCol = 0;
 	friend ostream& operator<<(ostream &os, const Board &b);
 	Block& locate(int x, int y);
+	bool isGiven() { Block* block = board[cursorRow - 1][cursorCol - 1]; bool given = block->isEditable(); return given; }
 	int win();
 };
 
