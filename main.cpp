@@ -1,6 +1,14 @@
 #include "Board.h"
 #include "ArrowNav.h"
 
+void enableVirtualTerminal() {
+	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	DWORD dwMode = 0;
+	GetConsoleMode(hOut, &dwMode);
+	dwMode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+	SetConsoleMode(hOut, dwMode);
+}
+
 void howToPlay() {
 
 	cout << "How to play:" << endl;
@@ -18,6 +26,7 @@ void howToPlay() {
 }
 
 int main() {
+	enableVirtualTerminal();
 	srand(time(NULL));
 	cout << "Welcome to Sudoku! " << endl << endl << endl;
 	howToPlay();
@@ -51,14 +60,38 @@ int main() {
 		else if (ch >= '1' && ch <= '9') {
 			int guess = ch - '0';
 			try {
-				b.locate(b.cursorRow + 1, b.cursorCol + 1).guess(guess);
-				b.locate(b.cursorRow + 1, b.cursorCol + 1).check();
+				b.locate(b.cursorRow + 1, b.cursorCol + 1).note(guess);
 			}
 			catch (const exception& e) {
 				cout << "\033[31m" << "Error: " << e.what() << "\033[0m" << endl;
 				cout << "Press any key to continue";
 				_getch();
 				cout << b;
+			}
+		}
+		else if (ch == '!' || ch == '@' || ch == '#' || ch == '$' || ch == '%' ||
+			ch == '^' || ch == '&' || ch == '*' || ch == '(') {
+			int num;
+			switch (ch) {
+			case '!': num = 1; break;
+			case '@': num = 2; break;
+			case '#': num = 3; break;
+			case '$': num = 4; break;
+			case '%': num = 5; break;
+			case '^': num = 6; break;
+			case '&': num = 7; break;
+			case '*': num = 8; break;
+			case '(': num = 9; break;
+			default: num = 0; break;
+			}
+			try {
+				b.locate(b.cursorRow + 1, b.cursorCol + 1).guess(num);
+				b.locate(b.cursorRow + 1, b.cursorCol + 1).check();
+			}
+			catch (const exception& e) {
+				cout << "\033[31m" << "Error: " << e.what() << "\033[0m" << endl;
+				cout << "Press any key to continue";
+				_getch();
 			}
 		}
 		else if (ch == '0' || ch == 8) {
