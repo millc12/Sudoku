@@ -24,12 +24,12 @@ public:
 	Block();
 	Block(int r, int c, int num);
 	virtual ~Block() {}
+	friend ostream& operator<<(ostream& os, const Board& b);
 	virtual bool isEditable() const = 0;
 	virtual int guess(int num) = 0;
 	virtual int check() = 0;
 	virtual void note(int num) = 0;
 	virtual bool viewNote() const = 0;
-	friend ostream& operator<<(ostream& os, const Board& b);
 };
 
 class GivenBlock : public Block {
@@ -38,7 +38,7 @@ public:
 	bool isEditable() const override { return false; }
 	int guess(int num) override {throw runtime_error("Cannot guess on a given cell");}
 	int check() override { return 1; }
-	void note(int num) override {  }
+	void note(int num) override {}
 	bool viewNote() const override { return 1; }
 };
 

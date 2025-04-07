@@ -3,26 +3,24 @@
 
 
 string setColor(int fr, int fg, int fb, int br = -1, int bg = -1, int bb = -1) {
-	string fgPart = "\033[38;2;" + to_string(fr) + ";" + to_string(fg) + ";" + to_string(fb) + "m";
-	string bgPart = "";
-	if (br != -1 && bg != -1 && bb != -1) {
-		bgPart = "\033[48;2;" + to_string(br) + ";" + to_string(bg) + ";" + to_string(bb) + "m";
-	}
-	return fgPart + bgPart;
+	string text = "\033[38;2;" + to_string(fr) + ";" + to_string(fg) + ";" + to_string(fb) + "m";
+	string background = "";
+	if (br != -1 && bg != -1 && bb != -1) {background = "\033[48;2;" + to_string(br) + ";" + to_string(bg) + ";" + to_string(bb) + "m";}
+	return text + background;
 }
 
 ostream& operator<<(ostream& os, const Board& b) {
 	string colors[10][2];
 
-	string important = setColor(150, 110, 75);
+	string important = setColor(150, 110, 75, 0, 0, 0);
 
 	// System-level (non-digit) colors
-	colors[0][0] = setColor(70, 40, 20,0,0,0);;                       // skeleton (reset)
-	colors[0][1] = setColor(100,100,100, 0, 0, 0);     // notes (dark bg)
+	colors[0][0] = setColor(70, 40, 20, 0, 0, 0);             // skeleton (reset)
+	colors[0][1] = setColor(100,100,100, 0, 0, 0);           // notes (dark bacckground)
 
 	// Digit colors
-	colors[1][1] = setColor(180, 60, 60,0,0,0);             // 1 - regular
-	colors[1][0] = setColor(180, 60, 60, 25, 25, 25); // 1 - input bg
+	colors[1][1] = setColor(180, 60, 60,0,0,0);             
+	colors[1][0] = setColor(180, 60, 60, 25, 25, 25);		
 
 	colors[2][1] = setColor(200, 120, 40,0,0,0);
 	colors[2][0] = setColor(200, 120, 40, 25, 25, 25);
@@ -49,16 +47,12 @@ ostream& operator<<(ostream& os, const Board& b) {
 	colors[9][0] = setColor(180, 100, 140, 25, 25, 25);
 	system("CLS");
 
-
 	string numbers[3][9] = {
       // "1234567"  "1234567"  "1234567"  "1234567"  "1234567"  "1234567"  "1234567"  "1234567"  "1234567"
 		{"  / |  ", " |_  ) ", " |__ / ", " | | | ", " | __| ", "  / /  ", " |__  |", " ( _ ) ", " / _ \\ "},
 		{"  | |  ", "  / /  ", "  |_ \\ ", " |_  _|", " |__ \\ ", " / _ \\ ", "   / / ", " / _ \\ ", " \\_, / "},
 		{"  |_|  ", " /___| ", " |___/ ", "   |_| ", " |___/ ", " \\___/ ", "  /_/  ", " \\___/ ", "  /_/  "},
 	};
-
-
-
 
 	string toPrint[9][9][3];
 	int num;
@@ -100,7 +94,7 @@ ostream& operator<<(ostream& os, const Board& b) {
 
 	for (int i = 0; i < 9; i++) {
 		for (int line = 0; line < 3; line++) {
-			os << colors[0][0] << "|"; // Left border for the row
+			os << colors[0][0] << "|";
 			for (int j = 0; j < 9; j++) {
 				if (i == b.cursorRow && j == b.cursorCol) os << "\033[7m";
 				os << toPrint[i][j][line];
@@ -110,16 +104,11 @@ ostream& operator<<(ostream& os, const Board& b) {
 			}
 			os << endl;
 		}
-
-		// After every 3 rows, print thick horizontal separator
 		if (i == 2 || i == 5)
 			os << important << "===========================================================================" << endl;
 		else if (i != 8)
 			os << colors[0][0] << "---------------------------------------------------------------------------" << endl;
 	}
-
 	os << colors[0][0] << "===========================================================================" << endl;
-
-
 	return os;
 };
